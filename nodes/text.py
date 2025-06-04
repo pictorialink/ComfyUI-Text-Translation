@@ -120,9 +120,7 @@ class Text_Translation_V2_Full:
     def func(self, trans_switch, trans_text, translator, source_language, target_language):
         output_text = ""
         ok = has_non_english_character(trans_text)
-        print(ok)
-        print("......")
-        if trans_switch:
+        if trans_switch and ok:
             translator = translator.lower()
             if(source_language != "auto"):
                source_language = source_language.split("(")[1].split(")")[0]
