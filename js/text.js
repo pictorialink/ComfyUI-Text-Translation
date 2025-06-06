@@ -55,7 +55,7 @@ function text_translation_v2_widget(nodeType, nodeData, app) {
 				toggleWidget(node, findWidgetByName(node, 'source_language'), false);
 				toggleWidget(node, findWidgetByName(node, 'target_language'), false);
 
-				node.addWidget("button", "Show / Hide button", "button_show", function(value, widget, node){
+				node.addWidget("button", "Show_Hide_button", "button_show", function(value, widget, node){
 
 					let is_show = null 
 					if(this.value === "button_show") {
