@@ -1,0 +1,34 @@
+name: Notify Tag Creation
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract tag info
+        id: tag_info
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "sha=$GITHUB_SHA" >> $GITHUB_OUTPUT
+          echo "repo=$GITHUB_REPOSITORY" >> $GITHUB_OUTPUT
+
+
+      - name: Check if PAT is set
+        run: |
+          if [ -n "${{ secrets.PROJECT1_PAT }}" ]; then
+            echo "PAT is set and not empty."
+          else
+            echo "PAT is not set or empty."
+          fi
+      - name: Trigger project1 workflow
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PROJECT1_PAT }}  
+          repository: pictorialink/ComfyUI-Custom-Node-Tags 
+          event-type: project2_tag_created
+          client-payload: '{"tag": "${{ steps.tag_info.outputs.tag }}", "sha": "${{ steps.tag_info.outputs.sha }}", "source_repo": "${{ steps.tag_info.outputs.repo }}"}'
