@@ -1,0 +1,16 @@
+[project]
+name = "text-translation"
+description = "This node uses the Translators library for translation."
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["translators"]
+
+[project.urls]
+Repository = "https://github.com/pictorialink/ComfyUI-Text-Translation"
+#  Used by Comfy Registry https://registry.comfy.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-Text-Translation"
+Icon = ""
+includes = []
